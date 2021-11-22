@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>01_Symbol,Map</title>
+    <script type="text/javascript">
+        // 하루에 10개씩 수확 30일후 카운트 갯수
+        const fruit = [
+        {
+        name: '사과',
+        count: 45,
+        address: '수원'
+        },
+        {
+        name: '포도',
+        count: 60,
+        address: '서울'
+        },
+        {
+        name: '오렌지',
+        count: 15,
+        address: '대구'
+        }
+        ];
+
+        function fnEachFruits(obj) {
+        obj.count += 30 * 10;
+        if(obj.name === '사과') {
+        obj.address = '부산'
+        }else if(obj.name === '포도') {
+        obj.address = '강원도'
+        }else{
+        obj.address = '제주도'
+        }
+        document.write('<li>'+obj.name+' '+obj.count+'개 '+obj.address+'에서 수확했습니다.'+'</li>');
+        }
+
+        document.write('<ul>');
+        fruit.map(fnEachFruits);
+        document.write('</ul>');
+    </script>
+</head>
+<body>
+</body>
+</html>
