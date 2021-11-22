@@ -1,0 +1,59 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+const fruit = [
+  {
+    name: '사과',
+    count: 45,
+    address: '수원'
+  },
+  {
+    name: '포도',
+    count: 60,
+    address: '서울'
+  },
+  {
+    name: '오렌지',
+    count: 15,
+    address: '대구'
+  }
+];
+
+// 하루에 10개씩 수확  30일후 카운트 갯수 
+const fruitTotalCount = fruit.map((fruit) => {
+
+  const returnObj = fruit;
+  returnObj.count += 10*30;
+  
+  let newAddress;
+  switch(returnObj.name) {
+    case '사과':
+      newAddress = '부산';
+      break;
+    case '포도':
+      newAddress = '강원도';
+      break;
+    default:
+      newAddress = '제주도';
+      break;
+  }
+  
+  returnObj.address = newAddress;
+  
+  return returnObj;
+})
+
+$(document).ready(function(){
+	fruitTotalCount.map(function(item,index){
+		$("#test35").append( "<li>"+item.name+" "+item.count+"개 "+item.address+"에서 수확했습니다.</li>");
+	})
+})
+
+
+</script>
+
+<body>
+<div>
+	<ul id="test35">
+	</ul>
+</div>
+</body>
