@@ -1,4 +1,3 @@
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
 const fruit = [
   {
@@ -42,11 +41,12 @@ const fruitTotalCount = fruit.map((fruit) => {
   return returnObj;
 })
 
-$(document).ready(function(){
-	fruitTotalCount.map(function(item,index){
-		$("#test35").append( "<li>"+item.name+" "+item.count+"개 "+item.address+"에서 수확했습니다.</li>");
-	})
+
+fruitTotalCount.map(function(item,index){
+	console.log(item.name+" "+item.count+"개 "+item.address+"에서 수확했습니다.")
 })
+
+
 
 
 </script>
