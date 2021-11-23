@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>과제</title>
+    </head>
+    <script>
+        "use strict";
+
+        const fruit = [
+            {
+                name: "사과",
+                count: 45,
+                address: "수원",
+            },
+            {
+                name: "포도",
+                count: 60,
+                address: "서울",
+            },
+            {
+                name: "오렌지",
+                count: 15,
+                address: "대구",
+            },
+        ];
+
+        const local_arr = ["부산", "강원도", "제주도"];
+
+        let fruit_map = new Map();
+
+        function calc(cnt, day) {
+            return this.count + (+cnt * +day);
+        }
+
+        fruit.forEach((obj, idx) => {
+            // Object.defineProperty(obj, 'address', {value : local_arr[idx]});
+            obj.address = local_arr[idx];
+            fruit_map.set(obj.name, obj);
+        });
+
+        window.onload = () => {
+            const _ul = document.getElementById('list');
+            
+            for (let map of fruit_map.values()) {
+                const _li = document.createElement('li');
+                _li.innerHTML = `${map.name} ${calc.call(map, 10, 30)}개 ${map.address}에서 수확했습니다.` ;
+                _ul.appendChild(_li);
+            }
+        }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        img {
+            display: block;
+        }
+    </style>
+    <body>
+        <ul id="list"></ul>
+    </body>
+</html>
