@@ -46,6 +46,8 @@
             
             for (let map of fruit_map.values()) {
                 const _li = document.createElement('li');
+
+                //function.call(obj, arg1, arg2...) : 호출하는 함수 this에 obj를 할당함.
                 _li.innerHTML = `${map.name} ${calc.call(map, 10, 30)}개 ${map.address}에서 수확했습니다.` ;
                 _ul.appendChild(_li);
             }
