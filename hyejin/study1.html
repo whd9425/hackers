@@ -1,0 +1,36 @@
+<script>
+
+    // 하루에 10개씩 수확  30일후 카운트 갯수
+    
+    const fruit = [
+      {
+        name: '사과',
+        count: 45,
+        address: '수원'
+      },
+      {
+        name: '포도',
+        count: 60,
+        address: '서울'
+      },
+      {
+        name: '오렌지',
+        count: 15,
+        address: '대구'
+      }
+    ];
+    
+    const map = new Map([['num',10],['day',30]]);
+    const arr = ['부산', '강원도', '제주도'];
+    
+    fruit.forEach(function(item, idx) {
+        console.log(item.name+' '+(item.count + map.get('num') * map.get('day')) +'개 '+arr[idx] + '에서 수확했습니다.');
+    })
+    
+    </script>
+    <style>
+        *{margin:0;padding:0;}
+        img{display:block;}
+    </style>
+    <body>
+    </body>
