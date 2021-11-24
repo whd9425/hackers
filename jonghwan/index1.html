@@ -13,8 +13,6 @@
 	let test28 = [...setName];
 	let lastFilter = [...new Set(names)]; //위 변수들 한번에 사용하여 배열 중복 제거 , 하지만 Set은 이 용도 외 사용할곳이 없는것 같음........
 	
-	//console.log(setName);
-	//console.log(result9);
 	
 	//1. set 사용전
 	// set     add,clear,constructor,delete,size,entries,forEach,has  등등
@@ -35,7 +33,7 @@
 	//const test34 = names.some( i => ["테스트", "또치"].includes(i) ); //값은 true,false
 	const test34 = names.every( i => ["테스트", "또치"].includes(i) ); //값은 true,false
 
-	console.log(test34);
+	//console.log(test34);
 
 	//기존 filter  이용하여 배열 중복 제거  
 	const uniqueArr = names.filter((element, index) => { 
@@ -69,13 +67,12 @@
 
 
 lastFilter.map(function(item,index){
-	console.log(item);
-	console.log(index);
+	//console.log(item);
 })
 
 
 lastFilter.forEach( (value, index) => { 
-  console.log(`${index}: ${value}`);
+ // console.log(`${index}: ${value}`);
 });
 
 
@@ -103,6 +100,15 @@ test12 = (indexs) => {
 (test12 = (indexs) => {
 	//alert(indexs);
 })(7);
+
+
+//Prototype 확인
+
+const arrMap = new Map([ ["name","종환"]  ])
+
+console.log(setName);
+console.log(arrMap);
+
 
 </script>
 
