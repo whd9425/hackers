@@ -102,6 +102,19 @@ test12 = (indexs) => {
 })(7);
 
 
+
+//아래  es5 문법을 es6 화살표 문법으로 변경한내용
+
+const numbers = [1, 4, 9];
+// ES5
+const oddArr = numbers.filter(function (x) { return x % 2 !== 0;});
+console.log(oddArr); // [1, 9]
+
+//ES6
+//const oddArr = numbers.filter( x => (x % 2) !== 0 );
+//console.log(oddArr); // [1, 9]
+
+
 //Prototype 확인
 
 const arrMap = new Map([ ["name","종환"]  ])
