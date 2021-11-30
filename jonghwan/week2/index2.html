@@ -1,0 +1,125 @@
+<script>
+
+	function* generatorTest(array){
+		const available = array;
+		
+		while (available.length !== 0)
+		{
+			const randomIndex = Math.floor(Math.random() * available.length);
+			const value = available[randomIndex];
+
+			available.splice(randomIndex, 1);
+
+			yield value;
+		}
+	}
+
+	const names = ["둘리","또치","희동이","고길동","마이콜","이기철","이기영"]; 
+	const uniqueNames = generatorTest(names);
+
+	
+
+	
+	for(const value of uniqueNames){
+		console.log(value);
+	}
+	
+	
+
+
+/*
+	next에 인자값 전달
+	next를 처음 호출할 땐 항상 인수값이 없어야 함
+*/
+function *myGen() {
+    const x = yield 1;       
+    const y = yield (x + 1); 
+    const z = yield (y + 2); 
+    return x + y + z;
+}
+
+
+const myItr = myGen();
+console.log(myItr.next());   // {value:1, done:false}
+console.log(myItr.next(10)); // {value:11, done:false}
+console.log(myItr.next(20)); // {value:22, done:false}
+console.log(myItr.next(30).value); // {value:60, done:true}
+
+
+
+
+let test35 = [
+            {
+                "Idx": 1,
+                "cateCode": "정보",
+                "Title": "활동에는 어떤것이 있나요??1",
+                "userId": "김유정",
+                "Datetime": "2021-07-12"
+            },
+           {
+                "Idx": 2,
+                "cateCode": "정보",
+                "Title": "활동에는 어떤것이 있나요??2",
+                "userId": "김유정",
+                "Datetime": "2021-07-12"
+            },
+			{
+                "Idx": 3,
+                "cateCode": "정보",
+                "Title": "활동에는 어떤것이 있나요??3",
+                "userId": "김유정",
+                "Datetime": "2021-07-12"
+            },
+			{
+                "Idx": 4,
+                "cateCode": "정보",
+                "Title": "활동에는 어떤것이 있나요??4",
+                "userId": "김유정",
+                "Datetime": "2021-07-12"
+            }
+]
+//console.log(test35[0].Title)
+function *testGem(){
+	for(let i = 0 ; i < test35.length; i++) {
+		yield test35[i].Title
+	}
+	return "수고하셨습니다."
+}
+
+let test22 = testGem();
+
+/*
+추후 배우게될  promise , es7(async, await) ,npm co library  사용시 더 유용하고 비동기처리 에서 사용가능   
+단점은 next로 다음 기능 구현시  이전 데이터는 불러올수 없음....
+*/
+eventBox = (thiss) => {  
+		
+		const test35 = test22.next();
+
+		if(test35.value == undefined){ 
+			alert("더이상 없습니다.");
+			return false
+		}
+
+		thiss.innerHTML = test35.value;
+		console.log(test35);
+		/*
+		
+		if(test22.next().done == true){
+			console.log(test22.next().value);
+		}
+		thiss.innerHTML = test22.next().value;
+		console.log( test22.next());
+		*/
+}
+
+
+
+
+
+
+</script>
+
+<div id="eventbox" onClick="eventBox(this)">
+	이벤트박스
+</div>
