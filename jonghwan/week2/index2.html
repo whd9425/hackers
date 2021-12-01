@@ -1,10 +1,14 @@
 <script>
-
+	/*
+		깃 주소
+		https://whd9425.github.io/hackers/study/week2/
+	*/
 	function* generatorTest(array){
 		const available = array;
 		
 		while (available.length !== 0)
 		{
+			
 			const randomIndex = Math.floor(Math.random() * available.length);
 			const value = available[randomIndex];
 
@@ -48,7 +52,7 @@ console.log(myItr.next(30).value); // {value:60, done:true}
 
 
 
-let test35 = [
+let testArray = [
             {
                 "Idx": 1,
                 "cateCode": "정보",
@@ -78,10 +82,10 @@ let test35 = [
                 "Datetime": "2021-07-12"
             }
 ]
-//console.log(test35[0].Title)
+//console.log(testArray[0].Title)
 function *testGem(){
-	for(let i = 0 ; i < test35.length; i++) {
-		yield test35[i].Title
+	for(let i = 0 ; i < testArray.length; i++) {
+		yield testArray[i].Title
 	}
 	return "수고하셨습니다."
 }
@@ -91,20 +95,22 @@ let test22 = testGem();
 /*
 추후 배우게될  promise , es7(async, await) ,npm co library  사용시 더 유용하고 비동기처리 에서 사용가능   
 단점은 next로 다음 기능 구현시  이전 데이터는 불러올수 없음....
+
+https://joshua1988.github.io/web-development/javascript/js-async-await/
 */
 eventBox = (thiss) => {  
 		
-		const test35 = test22.next();
+		const test37 = test22.next();
 
-		if(test35.value == undefined){ 
+		if(test37.value == undefined){ 
 			alert("더이상 없습니다.");
 			return false
 		}
 
-		thiss.innerHTML = test35.value;
-		console.log(test35);
+		thiss.innerHTML = test37.value;
+		console.log(test37);
+
 		/*
-		
 		if(test22.next().done == true){
 			console.log(test22.next().value);
 		}
@@ -112,11 +118,6 @@ eventBox = (thiss) => {
 		console.log( test22.next());
 		*/
 }
-
-
-
-
-
 
 </script>
 
