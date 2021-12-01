@@ -31,9 +31,8 @@
         typeof createIter[Symbol.iterator] === 'function'
 
         function* creategene () {
-            let cnt = obj.start+1
-            for(; cnt <= obj.end; cnt+=2) {
-                yield cnt 
+            for(let cnt = obj.start; cnt <= obj.end; cnt++) {
+                yield cnt % 2 == 0 ? cnt+=2 : ++cnt
             }
         }
         const gen = creategene()
