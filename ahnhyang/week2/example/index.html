@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Generator 예제 (비동기 프로그래밍)</title>
+    </head>
+    <body>
+        <script>
+            "use strict";
+
+            /** 
+            @description
+            회원 정보 > 회원 등급 > 회원 등급별 혜택
+            차례대로 호출되어야만 정상 작동이 가능한 
+            제너레이터 비동기 프로그래밍 예제
+            (간단한 에러 핸들링도 포함)
+
+            - Generator
+            :   일반함수는 하나의 값만을 반환하지만,
+                제너레이터 사용시 여러개의 값을 한개씩 반환(yield)이 가능. 
+
+                제너레이터 반환값 === 이터러블 객체이기때문에,
+                for .. of와 같은 반복문, 
+                ... 와 같은 전개문법도 사용 가능하다.
+
+                따라서 필드에서는 비동기 처리 프로그래밍에 자주 사용되며,
+                최근엔 Promise와 ES2017(ES8)에서 등장한 async/await 와 함께 사용된다. (추후 학습예정)
+            **/
+
+            /**
+            * ! 제너레이터는 지연평가 로직이 가능하다 !
+            * 
+            무한수열 생성과 같은 스크립트를 실행하려고 할 때,
+            한번에 무한대의 숫자를 생성하려고 하면
+            무한로딩으로 인해 페이지가 멈춰 다운된다. 
+            
+            이때 제너레이터는 next() 호출시점에만 그때그때 값을 생성하기에,
+            무한수열 생성시에도 스크립트 정상실행이 가능하다.
+
+            10000000000만큼 반복되는 조건문을 실행한다고 가정했을때,
+            일반함수 실행보다 제너레이터 함수 실행이 속도가 확연히 빠르다. 
+            (숫자가 클수록 효과가 크다.)
+            
+            (*지연평가 - 로직에서 뒤늦게 값이 필요할 때 만들어내는 방식)
+
+            **/
+
+            //회원
+            const MEMBER = [
+                {
+                    MEMBER_NO: 1,
+                    NAME: "김철수",
+                    AGE: 20,
+                },
+                {
+                    MEMBER_NO: 2,
+                    NAME: "김영희",
+                    AGE: 22,
+                },
+                {
+                    MEMBER_NO: 3,
+                    NAME: "김영훈",
+                    AGE: 15,
+                },
+            ];
+
+            //회원 등급
+            const GRADE = [
+                {
+                    MEMBER_NO: 1,
+                    GRADE: "GOLD",
+                },
+                {
+                    MEMBER_NO: 2,
+                    GRADE: "BEGIN",
+                },
+                {
+                    MEMBER_NO: 3,
+                    GRADE: "VIP",
+                },
+            ];
+
+            //회원 등급별 혜택
+            const BENEFIT = {
+                BEGIN: "교재1권",
+                GOLD: "스타벅스커피쿠폰",
+                VIP: "애플워치",
+            };
+
+            function printArr(arr) {
+                console.log(`데이터 로드 성공!`);
+                console.log(...arr);
+            }
+
+            function sleep(ms, isError, arr) {
+                return setTimeout(function () {
+                    try {
+                        if (isError === "success") {
+                            generator.next();
+                            printArr(arr);
+                        } else {
+                            generator.throw(e);
+                        }
+                    } catch (e) {
+                        console.log("에러발생!");
+                        console.log("정보를 불러오는데 실패했습니다!");
+                    }
+                }, ms);
+            }
+
+            //위 sleep()을 사용하면 비동기 처리를 아래와 같이 동기적으로 작성할 수 있다.
+            let generator = (function* () {
+                console.log("데이터 로드 시작");
+                yield sleep(2000, "success", MEMBER);
+                yield sleep(2000, "failed", GRADE); //에러발생!!
+                yield sleep(2000, "success", BENEFIT); //상위 에러가 발생되어 실행되지 않는다.
+            })();
+
+            generator.next();
+
+        </script>
+    </body>
+</html>
