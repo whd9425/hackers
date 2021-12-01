@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2주차 예제 (Generator & Iterable)</title>
+</head>
+<body>
+    <script>
+
+// zzzzz bbbb
+// 내장된 next() 함수 와 함께 반복자를 생성하는 iter() 함수에 collection(list)를 전달
+//iterator 의 next() 함수를 호출할 때마다 iterable로 이동하여 하나 이상의 요소를 가져옴
+//요소가 소진되면 반복 중지를 나타내는 예외가 발생
+
+// Iterator의 주요 메서드
+// hasNext()는 while문과 같이 주로 사용
+// next()는 변수의 데이터를 입력할 때 다음 단계의 데이터를 읽을 때 사용
+// remove() 많이 사용하지 않지만 데이터를 삭제할 때 사용
+
+
+            var evenNum = {
+                max: 50,
+                [Symbol.iterator]() {
+                    return this;
+                },
+                next() {
+                    if (this._max === undefined) {
+                        this._max = this.max;
+                    }
+                    if (this._max > -1) {
+                        return {value: this._max--}; 
+                    } else {
+                        return {done: true}; 
+                    }
+                }
+            };
+            var v = evenNum[Symbol.iterator]();
+            console.log(v.next());
+
+        //문제 -미완성
+        // item = ['식빵','쨈','야채','햄','계란','먹기','커피']
+
+        // brunch = iter(item)
+
+        // print('\n*** 브런치 준비 ***\n')
+
+        // try:
+        // print(next(brunch),'놓고')
+        // print(next(brunch),'바르고')
+        // print(next(brunch),'올리고')
+        // print(next(brunch),'넣고')
+        // print(next(brunch),'얹고')
+        // print('맛있게'next(brunch),'~~') 
+        // print('그리고'next(brunch),'마시기')      
+        // print(next(brunch)) // stopIteration발생
+        
+        // except StopIteration:
+        // print('\잘먹었다 !!!')
+
+    </script>
+
+    
+</body>
+</html>
