@@ -101,10 +101,10 @@
                             generator.next();
                             printArr(arr);
                         } else {
-                            generator.throw(e);
+                            generator.throw(new Error('에러발생!'));
                         }
                     } catch (e) {
-                        console.log("에러발생!");
+                        console.log(e);
                         console.log("정보를 불러오는데 실패했습니다!");
                     }
                 }, ms);
