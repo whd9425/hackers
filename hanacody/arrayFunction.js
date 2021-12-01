@@ -2,7 +2,7 @@
 //forEach, map, filter, every/some, reduce/reduceRight, indexOf, sort, find, findIndex, includes
 
 //0.배열기초
-//for, for-in(key), for-of(value)
+//for, for-in(유사배열객체), for-of(value,iterable)
 
 // let sampleObj = {
 //     a : 1,
@@ -22,7 +22,7 @@
 
 //1. forEach (배열순회 리턴이 없음)
 // map, forEach 둘 다 배열을 순회하며 인자로 전달한 원소의 값을 가지고 함수 로직을 구현한다 
-// 배열을 순회하며 해당배열을 조작할때 쓰임(원데이터를 커스터마이징)
+// 배열을 순회(iterable)하며 해당배열을 조작할때 쓰임(원데이터를 커스터마이징)
 // jquery each 와 동일
 
 const data = [1,2,3,4,5,null,4,3,2,1];
