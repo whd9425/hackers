@@ -1,6 +1,6 @@
-# week3 - class, Promise
+# week3
 
-입력한 id와 password에 따라 `alert을 반환`하는 index.html이 있습니다.
+`class`로 작성된 함수를 `Promise` 변경해주세요 (oﾟvﾟ)ノ
 
 ```js
 class UserStorage {
@@ -42,10 +42,7 @@ class UserStorage {
 const userStorage = new UserStorage();
 const id = prompt('enter your id');
 const password = prompt('enter your password');
-```
 
-아래 코드를 `promise`를 사용하여 구현해주세요.
-```js
 userStorage.loginUser(
     id, 
     password, 
