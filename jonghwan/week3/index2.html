@@ -1,0 +1,64 @@
+<script>
+function setTimeoutPromise(ms) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => resolve(), ms);
+  });
+}
+
+
+async function fetchAge(id,age) {
+  console.log(`${id} 프로 ${age}살 데이터 받아오기 완료!`);
+  return age;
+}
+/*
+async function fetchAge(id,age) {  // await 배우면서 한번 써봄 
+  await setTimeoutPromise(1000);
+  console.log(`${id} 프로 ${age}살 데이터 받아오기 완료!`);
+  return age;
+}
+*/
+
+async function startAsyncJobs() {
+  let promises = [];
+  for (let i = 0; i < 10; i++) {
+	const agest = parseInt(Math.random() * 20 ) + 20;
+    promises.push(fetchAge(i,agest));   //위 const 함수 데이터값 배열에 푸쉬
+  }
+
+
+  let ages = await Promise.all(promises)
+
+	/*
+		Promise.all 을 사용해보았다. async-await 를 사용하려고 했으나
+		async-await 직렬방식으로 for 문을 10개 보내면 하나에 1초여서 10초를 다 기다려야한다.
+		그치만  Promise.all은 직렬방식이 아닌 병렬방식으로 실행되기 때문에 1초에 모든 프리머스를 다 배열에 담아 반환해준다.
+	*/
+
+
+ //await console.log(promises);
+
+	/*
+	async function startAsyncJobs() {
+	  let ages = [];
+	  for (let i = 0; i < 10; i++) {
+		const agest = parseInt(Math.random() * 20 ) + 20;
+		let age = await fetchAge(i,agest);  //
+		ages.push(age);
+		//console.log(age)
+	  }
+
+	*/
+	//배열.reduce((누적값, 현잿값, 인덱스, 요소) => { return 결과 }, 초깃값);
+
+   console.log(
+    `평균 나이는? ==> ${
+      ages.reduce((prev, current) => prev + current, 0) / ages.length
+    }살`
+  );
+}
+
+startAsyncJobs();
+
+
+
+</script>

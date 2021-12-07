@@ -1,0 +1,72 @@
+<script>
+	 class UserStorage {
+		constructor( id, password ) {
+			this.id = id;
+			this.password = password;
+		}
+
+		 async loginUser() {
+			if ((this.id === 'Id' && this.password === 'password') ||
+				(this.id === 'hackers' && this.password === '1234')) {
+				return this.id;
+			} else {
+				throw new Error("not found")
+			}
+		}
+
+		async getTeam(user) {
+			if (user === 'Id') {
+				return{ name: 'Pro', team: 'web development' };
+			} else if (user === 'hackers') {
+				return{ name: 'hackers', team: 'module' };
+			} else {
+				throw new Error('not found')
+			}
+		}
+	}
+
+
+async function test35(){
+	
+	const id = prompt('enter your id');
+	const password = prompt('enter your password');
+	const userStorage = new UserStorage(id, password);
+
+	try{
+		 await userStorage.loginUser()
+		.then(userStorage.getTeam)
+		.then(user => {
+			alert(`Hello ${user.name}, You're on the ${user.team} team`);
+		})
+	}catch(e){
+		alert(e)
+	}
+}
+
+test35();
+
+
+	//userStorage.loginUser();
+	
+
+	/*
+	userStorage.loginUser(
+		id, 
+		password, 
+		user => {
+			userStorage.getTeam(
+				user, 
+				userWidtteam => {
+					alert(`Hello ${userWidtteam.name}, You're on the ${userWidtteam.team} team`)
+				},
+				error => {
+					alert(error);
+				}
+			)
+		},
+		error => {
+			alert(error);
+		}
+	)
+	*/
+</script>
