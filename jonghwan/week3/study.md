@@ -176,13 +176,13 @@ throwError.then(
 
 ### async
 
-async 키워드는 함수를 선언할 때 함수명 앞에 붙여줄 수 있습니다.
+async 키워드는 함수를 선언할 때 함수명 앞에 붙여줄 수 있다
 
 async 함수는 Promise 와 굉장히 밀접한 연관을 가지고 있다.
 
 함수에 async 키위드를 붙이면 기존 resolve(value); 부분을 return value; 로 변경가능함. 
 그리고 reject(new Error(…)); 부분을 throw new Error(…); 로도 변경 가능해서 코드가 심플해짐
-또한 함수에 async 를 붙일시 따로 new Promise를 선언하지 않아도 사용가능
+또한 함수에 async 를 붙일시 따로 new Promise를 선언하지 않아도 값을 Promise로 반환해서 사용가능 
 
 
 ```js
