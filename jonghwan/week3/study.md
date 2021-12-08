@@ -90,7 +90,7 @@ const c = mew C();
 C = '10'; // 으로 선언시 변경가능
 ```
 
-### 외부 함수도 가져와서 사용가능?? []
+### 외부 함수도 가져와서 사용가능?? [] &#128560;
 ```js
 const method1 = 'sayNames'
 const fullNameGetter = 'fullname'
@@ -175,7 +175,7 @@ throwError.then(
 #    async,await 
 
 ### async
-
+⭐
 async 키워드는 함수를 선언할 때 함수명 앞에 붙여줄 수 있다
 
 async 함수는 Promise 와 굉장히 밀접한 연관을 가지고 있다.
@@ -183,7 +183,7 @@ async 함수는 Promise 와 굉장히 밀접한 연관을 가지고 있다.
 함수에 async 키위드를 붙이면 기존 resolve(value); 부분을 return value; 로 변경가능함. 
 그리고 reject(new Error(…)); 부분을 throw new Error(…); 로도 변경 가능해서 코드가 심플해짐
 또한 함수에 async 를 붙일시 따로 new Promise를 선언하지 않아도 값을 Promise로 반환해서 사용가능 
-
+⭐
 
 ```js
 
@@ -250,7 +250,7 @@ function setTimeoutPromise(ms) {
 }
 
 async function startAsyncJobs() {
-  await setTimeoutPromise(1000);//await 위 프라미스가 다 끝날때까지 밑에 수행 코드 수행못함
+  await setTimeoutPromise(1000);//await 위 프라미스가 다 끝날때까지 밑에 수행 코드 수행못함 ⭐
   const promise1 = startAsync(25);
   try {
     const value = await promise1;
