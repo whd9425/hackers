@@ -1,0 +1,18 @@
+[
+    {
+        "MEMBER_NO": "1",
+        "GRADE": "GOLD"
+    },
+    {
+        "MEMBER_NO": "2",
+        "GRADE": "BEGIN"
+    },
+    {
+        "MEMBER_NO": "3",
+        "GRADE": "VIP"
+    },
+    {
+        "MEMBER_NO": "4",
+        "GRADE": "GOLD"
+    }
+]
