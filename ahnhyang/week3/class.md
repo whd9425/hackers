@@ -54,7 +54,7 @@ alert(typeof User); // function
 <br/><br/>
 
 # 클래스 상속 (extends)
-#### 클래스 상속을 이용하면 다른 클래스의 기능을 가져와 기존 클래스의 기능을 넓힐(extends)할 수 있다.
+#### 클래스 상속을 이용하면 다른 클래스의 기능을 가져와 기존 클래스의 기능을 넓힐(extends) 수 있다.
 
 ### 기본 문법
 
@@ -107,7 +107,7 @@ class Child extends Parent {
 
 ### [[HomeObject]]
 
-#####[[HomeObject]] 란?
+##### [[HomeObject]] 란?
 - 함수 전용 특수 내부 프로퍼티
 - super는 [[HomeObject]]를 통해 부모프로토타입과 메서드를 찾는다.
 - 클래스이거나 객체 메서드인 함수의 [[HomeObject]] 프로퍼티는 해당 객체가 저장
