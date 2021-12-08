@@ -174,8 +174,8 @@ throwError.then(
 
 #    async,await 
 
-### async
-⭐
+### async  ⭐
+
 async 키워드는 함수를 선언할 때 함수명 앞에 붙여줄 수 있다
 
 async 함수는 Promise 와 굉장히 밀접한 연관을 가지고 있다.
