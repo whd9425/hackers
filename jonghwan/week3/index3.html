@@ -1,0 +1,85 @@
+<script>
+    mixin = function (SuperClass, OtherSuperClass) {
+        let result = Object.create(SuperClass.prototype);
+        let temp = Object.create(OtherSuperClass.prototype);
+        if (temp.__proto__.constructor !== Object) {
+            recur(result, temp.__proto__)
+        }
+        return result;
+
+        function recur(A, B) {
+            let temp = Object.getOwnPropertyNames(B);
+            for (let i of temp) {
+                if (!(i in A)) {
+                    A[i] = B[i];
+                }
+            }
+            if (B.__proto__.constructor !== Object) {
+                recur(A, B.__proto__)
+            }
+        }
+    }
+
+    class A {
+        constructor(name) {
+            this.name = name;
+        }
+
+        hi() {
+            return `my name is ${this.name}`;
+        }
+    }
+
+    class AA extends A {
+        constructor(name, age) {
+            super(name);
+            this.age = age;
+        }
+    }
+
+    class B {
+        constructor(hobby) {
+            this.hobby = hobby;
+        }
+    }
+
+    class BB extends B {
+        constructor(hobby, from) {
+            super(hobby);
+            this.from = from;
+        }
+
+        whereFrom() {
+            return `i'm from ${this.from}.`;
+        }
+    }
+
+    function MixC(name, age, hobby, from) {
+        let temp1 = new AA(name, age);
+        let temp2 = new BB(hobby, from);
+        for (let i in temp2) {
+            this[i] = temp2[i];
+        }
+        for (let i in temp1) {
+            this[i] = temp1[i];
+        }
+    }
+
+    MixC.prototype = mixin(AA, BB);
+    MixC.prototype.constructor = MixC;
+
+	class CC extends MixC { constructor(name, age, hobby, from) { super(name, age, hobby, from); this.state = '개피곤' } sleep() { return '잠은 무슨 공부나 더해'; } }
+
+
+    let a = new CC("황대성", 26, "없음", "전주");
+
+    console.log(a);
+
+    console.log(a.hi());
+
+    console.log(a.whereFrom())
+
+    console.log(a.sleep())
+
+
+</script>
