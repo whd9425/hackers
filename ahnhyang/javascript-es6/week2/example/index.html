@@ -101,7 +101,7 @@
                             generator.next();
                             printArr(arr);
                         } else {
-                            generator.throw(new Error('에러발생!'));
+                            generator.throw(new Error("에러발생!"));
                         }
                     } catch (e) {
                         console.log(e);
@@ -118,7 +118,24 @@
                 yield sleep(2000, "success", BENEFIT); //상위 에러가 발생되어 실행되지 않는다.
             })();
 
-            generator.next();
+            // generator.next();
+
+            let urls = [
+                "https://api.github.com/users/iliakan",
+                "https://api.github.com/users/remy",
+                "https://api.github.com/users/jeresig",
+            ];
+
+            // fetch를 사용해 url을 프라미스로 매핑합니다.
+            let requests = urls.map((url) => fetch(url));
+
+            // Promise.all은 모든 작업이 이행될 때까지 기다립니다.
+            Promise.all(requests).then((responses) =>{
+                console.log(responses);
+                responses.forEach((response) =>
+                    alert(`${response.url}: ${response.status}`),
+                )},
+            );
         </script>
     </body>
 </html>
