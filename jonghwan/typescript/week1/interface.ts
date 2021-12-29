@@ -20,7 +20,7 @@ const capt1 ={
 
 }
 
-getUser(capt1)
+getUser1(capt1)
 
 // 함수의 스펙(구조)에 인터페이스를 활용
 
@@ -55,7 +55,7 @@ var obj1:StringRegex ={
 
 
 
-Object.keys(obj).forEach(function(value){//강의 후반부에 배움
+Object.keys(obj1).forEach(function(value){//강의 후반부에 배움
 
 
 })
