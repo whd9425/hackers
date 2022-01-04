@@ -49,8 +49,8 @@ nextjs란 React의 서버사이드 렌더링(SSR)을 쉽게 구현할 수 있게
 ### 3.1 Pre-rendering
 >  Next.js는 pre-rendering을 **Static Generation**, **Server-side Rendering** 두 가지 형식으로 제공한다. 
 >  
->  * Static Generation(SSG): 빌드 타임에 HTML을 생성하는 pre-rendering 방법이다. pre-rendered된 HTML은 각 요청마다 재사용이 가능하다.
->  * Server-side Rendering(SSR): 각 요청마다 HTML을 생성하는 pre-rendering 방법이다.
+>  * **Static site Generation(SSG)**: 빌드 타임에 HTML을 생성하는 pre-rendering 방법이다. pre-rendered된 HTML은 각 요청마다 재사용이 가능하다.
+>  * **Server-side Rendering(SSR)**: 각 요청마다 HTML을 생성하는 pre-rendering 방법이다.
 >  
 >  <code>npm run dev</code>나 <code>yarn dev</code>를 통해 개발을 하는 동안에는 Static Generation 방식을 사용하고 있다해도 모든 페이지가 각 요청마다 pre-rendering 된다.  
 >  여기서 중요한 점은, Next.js는 **각 페이지마다 우리에게 어떠한 pre-rendering 방식을 사용할지 선택할 수 있게 해주는 것**이다.  
