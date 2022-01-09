@@ -1,0 +1,14 @@
+class Person {
+    private name : string;
+    public age : number;
+    readonly log : string;
+
+    constructor(name : string, age : number){
+        this.name = name;
+        this.age = age;
+    }
+}
+
+var jihoon = new Person('지훈', 42);
+console.log(jihoon);
+
