@@ -1,22 +1,26 @@
 {
-    "parserOptions": {
-        "ecmaVersion": 2020,
-        "sourceType": "module",
-        "ecmaFeatures": {
-            "jsx":true
-        }
-    },
-    "env":{
-        "browse":true,
-        "node": true,
-        "es6" : true
-    },
-    "extends":[
-        "eslint:recommended", //나중에 엄격하게 변경 
-        "plugin:react/recommended" //나중에 엄격하게 변경 
-    ],
-    "plugins":[
-        "import",
-        "react-hooks"
-    ],
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+  "plugins": [
+    "import",
+    "react-hooks"
+  ]
+  // "rules": {
+  //   "jsx-a11y/label-has-associated-control": "off",
+  //   "jsx-a11y/anchor-is-valid": "off",
+  //   "no-console": "off"
+  // }
 }
