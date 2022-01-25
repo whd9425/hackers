@@ -5,6 +5,7 @@ import { Col, Input, Menu, Row } from 'antd';
 
 import LoginForm from './LoginForm';
 import UserProfile from './UserProfile';
+import { useSelector } from 'react-redux';
 
 interface Props {
   children?: React.ReactNode;
@@ -15,7 +16,7 @@ export interface FuncProps {
 }
 
 const AppLayout = ({ children }: Props) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { isLoggedIn } = useSelector((state) => state.user);
 
   return (
     <div>
@@ -29,8 +30,8 @@ const AppLayout = ({ children }: Props) => {
       <Row gutter={8}>
         <Col xs={24} md={6}>
           {isLoggedIn
-            ? <UserProfile setIsLoggedIn={setIsLoggedIn}/>
-            : <LoginForm setIsLoggedIn={setIsLoggedIn}/>}
+            ? <UserProfile />
+            : <LoginForm />}
         </Col>
         <Col xs={24} md={12}>
           {children}
