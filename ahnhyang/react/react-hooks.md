@@ -1,5 +1,5 @@
 # React Hooks
-React는 컴포넌트가 실행되거나 업데이트되거나 제거될 때 특정 메서드를 호출한다.
+React는 컴포넌트가 실행되거나 업데이트되거나 제거될 때 특정 메서드를 호출한다.  
 React Hooks는 함수형 컴포넌트에서 기존 클래스형 컴포넌트의 기능을 구현한 개념이다.
 
 * 컴포넌트 구조 이미지 (https://black9p.github.io/images/reactjs/Component.png)
