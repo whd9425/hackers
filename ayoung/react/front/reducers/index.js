@@ -1,69 +1,23 @@
-import { HYDRATE } from "next-redux-wrapper";
+import { HYDRATE } from 'next-redux-wrapper';
+import { combineReducers } from 'redux';
 
-const initialState = {
-    user: {
-        isLoggedIn: false, // 로그인하면 true로 변경
-        user: null,
-        signUpData: {},
-        loginData: {},
+import user from './user'; // 리듀서 불러오기
+import post from './post';
+
+// (이전상태,액션) => 다음상태 | 스위치문이 있는 함수
+const rootReducer = combineReducers({ // combineReducers = user리듀서 + post리듀서 
+    index: (state = {}, action) => { // HYDRATE를 쓰기 위해 index,리듀서 추가 (서버사이드렌더링 위해서)
+        // SSR HYDRATE를 위해 index reducer 추가
+        switch (action.type) {
+            case HYDRATE:
+                console.log("HYDRATE", action);
+                return { ...state, ...action.payload };
+            default:
+                return state;
+        }
     },
-    post: {
-        mainPosts: [],
-    }
-}
-
-export const loginAction = (data) => {
-    return {
-        type: 'LOG_IN',
-        data,
-    }
-}
-
-export const logoutAction = () => {
-    return {
-        type: 'LOG_OUT',
-    }
-}
-
-// 동적으로 액션 생성해주는 action creator (미리 다 만들어놓을 수 없기때문에)
-const changeNickname = (data) => {
-    return {
-        type: 'CHANGE_NICKNAME',
-        data, // 바꿀 닉네임
-    }
-}
-changeNickname('a0'); // data
-
-store.dispatch(changeNickname('rooroo'));
-
-
-const rootReducer = (state = initialState, action) => { // (이전상태,액션) => 다음상태 | 스위치문이 있는 함수
-    switch (action.type) {
-        case HYDRATE:
-            console.log('HYDRATE', action);
-            return { ...state, ...action.payload };
-        case 'LOG_IN':
-            return {
-                ...state, // initialState 객체 펴주기
-                user: { // 그 안에 user 객체가 있으면 
-                    ...state.user,
-                    isLoggedIn: true, // 나머지것들도 바꿔주기
-                    user: action.data,
-                },
-            };
-        case 'LOG_OUT':
-            return {
-                ...state,
-                user: {
-                    ...state.user,
-                    isLoggedIn: false, 
-                    user: null,
-                },
-            };
-        default:
-            return state;
-    
-    }
-};
+    user,
+    post,
+});
 
 export default rootReducer;
