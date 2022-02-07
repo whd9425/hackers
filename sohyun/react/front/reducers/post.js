@@ -27,13 +27,13 @@ export const initialState = {
     }],
     ImagePaths: [],
     postAdded: false
-}
+};
 
 const ADD_POST = 'ADD_POST';
 
 export const addPost = {
     type: ADD_POST
-}
+};
 
 const dummyPost = {
     id: 2,
@@ -44,9 +44,9 @@ const dummyPost = {
     },
     Images: [],
     Comments: []
-}
+};
 
-const reducer = (state = initialState, action) => {
+export default (state = initialState, action) => {
     switch (action.type) {
         case ADD_POST :
             return{
@@ -56,10 +56,8 @@ const reducer = (state = initialState, action) => {
                     ...state.mainPosts
                 ],
                 postAdded: true
-            }
+            };
         default : 
             return state;
     }
-}
-
-export default reducer;
+};
