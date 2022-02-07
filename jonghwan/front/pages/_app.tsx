@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import 'antd/dist/antd.css';
 import Head from 'next/head';
 import { AppProps, NextWebVitalsMetric } from 'next/app';
+import wrapper from '../store/configureStore';
 
 
 const App = ({Component}: AppProps) => {
@@ -24,4 +25,6 @@ const App = ({Component}: AppProps) => {
 
 //  }
 
-export default App;
+//export default App;
+
+export default wrapper.withRedux(App);

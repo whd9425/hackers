@@ -1,28 +1,32 @@
-import {Propss} from '../component/AppLayout'
-import {Card , Avatar ,Button} from 'antd';
-import React, { useEffect , useState , useCallback , useMemo } from "react";
+import { Avatar, Card, Button } from 'antd';
+import React, { useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
+import { logoutAction } from '../reducers/user';
 
-const UserProjile = ({setIsLoggedIn}: Propss) =>{
+const UserProfile = () => {
+  const { user } = useSelector(state => state.user);
+  const dispatch = useDispatch();
 
-        
-    const onLogOut = useCallback(() => {
-        setIsLoggedIn(false);
-    },[]);
+  const onLogout = useCallback(() => {
+    dispatch(logoutAction);
+  }, []);
 
-    
+  return (
+    <Card
+      actions={[
+        <div key="twit">짹짹<br />{user.Posts.length}</div>,
+        <div key="following">팔로잉<br />{user.Followings.length}</div>,
+        <div key="follower">팔로워<br />{user.Followers.length}</div>,
+      ]}
+    >
+      <Card.Meta
+        avatar={<Avatar>{user.nickname[0]}</Avatar>}
+        title={user.nickname}
+      />
+      <Button onClick={onLogout}>로그아웃</Button>
+    </Card>
+  );
+};
 
-    return(
-        <Card actions={[
-            <div key="twit">짹쨱<br/>0</div>,
-            <div key="followings">팔로잉<br/>0</div>,
-            <div key="followings">팔로워<br/>0</div>,
-        ]}>
-            <Card.Meta avatar={<Avatar>ZC</Avatar>} title="테스트"/>
-            <Button onClick={onLogOut}>로그아웃</Button>
-        </Card>
-    )
-
-}
-
-export default UserProjile
+export default UserProfile;
