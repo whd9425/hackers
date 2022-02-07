@@ -3,7 +3,8 @@ import React, { useEffect , useState , useRef } from "react";
 import {Menu , Input , Row , Col} from 'antd';
 import UserProfile from '../component/UserProfile';
 import LoginForm from '../component/LoginForm';
-import styled from 'styled-components';
+import styled,{createGlobalStyle } from 'styled-components';
+import { useSelector } from 'react-redux';
 
 interface typeTest{
     children?: React.ReactNode  //React.ReactNode 리엑트node  ProTpes.node 와 마찬가지로 모든타입을 허용
@@ -17,38 +18,50 @@ const SearchInput = styled(Input.Search)`
   vertical-align: middle;
 `;
 
+const Global = createGlobalStyle`
+  .ant-row {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+  }
+  
+  .ant-col:first-child {
+      padding-left: 0 !important;
+  }
+  
+  .ant-col:last-child {
+    padding-right: 0 !important;
+  }
+`;
+
+
+
 const AppLayout = ({children}: typeTest) =>{
-    const [isLoggedIn , setIsLoggedIn] = useState(false)
+    const { isLoggedIn } = useSelector(state => state.user);
     
     return (
         <div>
-            <Menu mode="horizontal">
-                <Menu.Item>
-                <Link href="/"><a>노드버드</a></Link>
-                </Menu.Item>
-                <Menu.Item>
-                    <Link href="/profile"><a>프로필</a></Link>
-                </Menu.Item>
-                <Menu.Item>
-                    <SearchInput enterButton />  
-                </Menu.Item>
-                <Menu.Item>
-                    <Link href="/signup"><a>회원가입</a></Link>
-                </Menu.Item>
-            </Menu>
-            <Row gutter={8}>
-                <Col xs={24} md={6}>
-                 {isLoggedIn ? <UserProfile  setIsLoggedIn={setIsLoggedIn}/> : <LoginForm  setIsLoggedIn={setIsLoggedIn}/>}     
-                </Col>
-                <Col xs={24} md={12}>
-                  {children}
-                </Col>
-                <Col xs={24} md={6}>
-                    <a href="https://www.naver.com" target="_blank" rel="noreferrer noopener">네이버가기</a>
-                </Col>
-            </Row>
-            
-        </div>
+      <Global />
+      <Menu mode="horizontal">
+        <Menu.Item key="home"><Link href="/"><a>노드버드</a></Link></Menu.Item>
+        <Menu.Item key="profile"><Link href="/profile"><a>프로필</a></Link></Menu.Item>
+        <Menu.Item key="mail">
+          <Input.Search enterButton style={{ verticalAlign: 'middle' }} />
+        </Menu.Item>
+      </Menu>
+      <Row gutter={8}>
+        <Col xs={24} md={6}>
+          {isLoggedIn
+            ? <UserProfile />
+            : <LoginForm />}
+        </Col>
+        <Col xs={24} md={12}>
+          {children}
+        </Col>
+        <Col xs={24} md={6}>
+          <a href="https://www.zerocho.com" target="_blank" rel="noreferrer noopener">Made by ZeroCho</a>
+        </Col>
+      </Row>
+    </div>
     )
 
 }
