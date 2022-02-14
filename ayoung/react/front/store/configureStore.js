@@ -1,19 +1,20 @@
 import { createWrapper } from 'next-redux-wrapper';
 import { applyMiddleware, createStore, compose } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension'; 
+import { composeWithDevTools } from 'redux-devtools-extension';
+import createSagaMiddleware from 'redux-saga';
 
 import reducer from '../reducers/index';
+import rootSaga from '../sagas';
+
 
 const configureStore = () => {
-    const middlewares = [];
+    const sagaMiddleware = createSagaMiddleware();
+    const middlewares = [sagaMiddleware, loggerMiddleware];
     const enhancer = process.env.NODE_ENV === 'production'
         ? compose(applyMiddleware(...middlewares)) // 배포용일때는 compose (히스토리가 남아서 보안 위험하기 때문에)
         : composeWithDevTools(applyMiddleware(...middlewares)) // 개발용 composeWithDevTools
     const store = createStore(reducer, enhancer);
-    store.dispatch({
-        type: 'CHANGE_NICKNAME',
-        data: 'a0',
-    })
+    store.sagaTask = sagaMiddleware.run(rootSaga);
     return store;
 };
 
