@@ -1,24 +1,25 @@
-// 페이지 공통되는것들 처리
 import React from 'react';
-import PropTypes from 'prop-types';
 import Head from 'next/head';
+import PropTypes from 'prop-types';
 import 'antd/dist/antd.css';
+
 import wrapper from '../store/configureStore';
 
-const NodeBird = ({ Component }) => {
-    return (
-        <>
-            <Head>
-                <meta charSet='utf-8' />
-                <title>NodeBird</title>
-            </Head>
-            <Component />
-        </>
-    );
-};
+const NodeBird = ({ Component }) => (
+    <>
+        <Head>
+            <title>NodeBird</title>
+        </Head>
+        <Component />
+    </>
+);
 
 NodeBird.propTypes = {
     Component: PropTypes.elementType.isRequired,
+};
+
+export function reportWebVitals(metric) {
+    console.log(metric);
 }
 
 export default wrapper.withRedux(NodeBird);

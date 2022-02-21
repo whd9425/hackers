@@ -6,13 +6,15 @@ import createSagaMiddleware from 'redux-saga';
 import reducer from '../reducers/index';
 import rootSaga from '../sagas';
 
-
-const configureStore = () => {
+const configureStore = (context) => {
+    console.log(context);
     const sagaMiddleware = createSagaMiddleware();
-    const middlewares = [sagaMiddleware, loggerMiddleware];
+    const middlewares = [sagaMiddleware];
     const enhancer = process.env.NODE_ENV === 'production'
         ? compose(applyMiddleware(...middlewares)) // 배포용일때는 compose (히스토리가 남아서 보안 위험하기 때문에)
-        : composeWithDevTools(applyMiddleware(...middlewares)) // 개발용 composeWithDevTools
+        : composeWithDevTools(
+            applyMiddleware(...middlewares), // 개발용 composeWithDevTools
+        );
     const store = createStore(reducer, enhancer);
     store.sagaTask = sagaMiddleware.run(rootSaga);
     return store;

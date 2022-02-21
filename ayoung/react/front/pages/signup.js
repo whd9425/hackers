@@ -1,42 +1,38 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
+import { Button, Checkbox, Form, Input } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
+import Router from 'next/router';
 import Head from 'next/head';
-import { Form, Input, Checkbox, Button } from 'antd';
-import styled from 'styled-components';
+
+import { SIGN_UP_REQUEST } from '../reducers/user';
 import AppLayout from '../components/AppLayout'; // 밑에 AppLayout으로 감싸주면 자동생성됨
 import useInput from '../hooks/useInput';
 
-const ErrorMessage = styled.div`
-    color: red;
-`;
-
 const Signup = () => {
-    // ▼ id 커스텀 훅 적용 전
+    const [passwordCheck, setPasswordCheck] = useState('');
+    const [term, setTerm] = useState(false);
+    const [passwordError, setPasswordError] = useState(false);
+    const [termError, setTermError] = useState(false);
+
+    // ▼ 커스텀 훅 적용 전
     // const [id, setId] = useState('');
     // const onChangeId = useCallback((e) => {
     //     setId(e.target.value);
     // }, []);
     // ▼ 커스텀 훅 적용 후 (컴포넌트useInput - [value, handler])
-    const [id, onChangeId] = useInput('');
-    const [nickname, onChangeNickname] = useInput('');
+    const [email, onChangeEmail] = useInput('');
+    const [nick, onChangeNick] = useInput('');
     const [password, onChangePassword] = useInput('');
+    const dispatch = useDispatch();
+    const { isSigningUp, me } = useSelector((state) => state.user);
 
-    // 비밀번호랑 비밀번호 확인이 일치하는지
-    const [passwordCheck, setPasswordCheck] = useState('');
-    const [passwordError, setPasswordError] = useState(false);
-    const onChangePasswordCheck = useCallback((e) => {
-        setPasswordCheck(e.target.value);
-        setPasswordError(e.target.value !== password); // 이 부분이 달라서 커스텀 훅 적용 못함. true가 아니면 에러표시(passwordError)
-    }, [password]);
+    useEffect(() => {
+        if (me) {
+            alert('로그인했으니 메인페이지로 이동합니다.');
+            Router.push('/');
+        }
+    }, [me && me.id]);
 
-    // 약관동의 체크박스를 체크하지 않았을때
-    const [term, setTerm] = useState('');
-    const [termError, setTermError] = useState(false); 
-    const onChangeTerm = useCallback((e) => {
-        setTerm(e.target.checked);
-        setTermError(false);
-    }, []);
-
-    // 에러메세지 호출
     const onSubmit = useCallback(() => {
         if (password !== passwordCheck) {
             return setPasswordError(true);
@@ -44,30 +40,48 @@ const Signup = () => {
         if (!term) {
             return setTermError(true);
         }
-        console.log(id, nickname, password);
-    }, [ password, passwordCheck, term ]);
+        return dispatch({
+            type: SIGN_UP_REQUEST,
+            data: {
+                email,
+                password,
+                nick,
+            },
+        });
+    }, [email, password, passwordCheck, term]);
 
+    // 비밀번호랑 비밀번호 확인이 일치하는지
+    const onChangePasswordCheck = useCallback((e) => { // 이 부분이 달라서 커스텀 훅 적용 못함. true가 아니면 에러표시(passwordError)
+        setPasswordError(e.target.value !== password);
+        setPasswordCheck(e.target.value);
+    }, [password]);
+
+    // 약관동의 체크박스를 체크하지 않았을때
+    const onChangeTerm = useCallback((e) => {
+        setTermError(false);
+        setTerm(e.target.checked);
+    }, []);
 
     return (
         <AppLayout>
             <Head>
                 <title>회원가입 | NodeBird</title>
             </Head>
-            <Form onFinish={onSubmit}>
+            <Form onFinish={onSubmit} style={{ padding: 10 }}>
                 <div>
-                    <label htmlFor="user-id">아이디</label>
+                    <label htmlFor="user-email">아이디</label>
                     <br />
-                    <Input name="user-id" value={id} required onChange={onChangeId} />
+                    <Input name="user-email" value={email} required onChange={onChangeEmail} />
                 </div>
                 <div>
-                    <label htmlFor="user-nickname">닉네임</label>
+                    <label htmlFor="user-nick">닉네임</label>
                     <br />
-                    <Input name="user-nickname" value={nickname} required onChange={onChangeNickname} />
+                    <Input name="user-nick" value={nick} required onChange={onChangeNick} />
                 </div>
                 <div>
                     <label htmlFor="user-password">비밀번호</label>
                     <br />
-                    <Input name="user-password" value={password} required onChange={onChangePassword} />
+                    <Input name="user-password" type="password" value={password} required onChange={onChangePassword} />
                 </div>
                 <div>
                     <label htmlFor="user-password-check">비밀번호체크</label>
@@ -79,14 +93,14 @@ const Signup = () => {
                         required
                         onChange={onChangePasswordCheck}
                     />
-                    {passwordError && <ErrorMessage>비밀번호가 일치하지 않습니다.</ErrorMessage>}
+                    {passwordError && <div style={{ color: 'red' }}>비밀번호가 일치하지 않습니다.</div>}
                 </div>
                 <div>
-                    <Checkbox name="user-team" checked={term} onChange={onChangeTerm}>위 약관에 동의합니다.</Checkbox>
-                    {termError && <ErrorMessage>약관에 동의하셔야 합니다.</ErrorMessage>}
+                    <Checkbox name="user-term" checked={term} onChange={onChangeTerm}>제로초 말을 잘 들을 것을 동의합니다.</Checkbox>
+                    {termError && <div style={{ color: 'red' }}>약관에 동의하셔야 합니다.</div>}
                 </div>
                 <div style={{ marginTop: 10 }}>
-                    <Button type='primary' htmlType='submit'>가입하기</Button> {/* 누르면 onFinish 이벤트 호출 */}
+                    <Button type="primary" htmlType="submit" loading={isSigningUp}>가입하기</Button> {/* 누르면 onFinish 이벤트 호출 */}
                 </div>
             </Form>
         </AppLayout>

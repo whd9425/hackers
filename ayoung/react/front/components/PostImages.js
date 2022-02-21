@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { PlusOutlined } from '@ant-design/icons';
 
-import ImagesZoom from './ImagesZoom'; // index자동으로 불러옴
+import ImagesZoom from './ImagesZoom'; // index 자동으로 불러옴
 
 const PostImages = ({ images }) => {
   const [showImagesZoom, setShowImagesZoom] = useState(false);
@@ -10,6 +10,7 @@ const PostImages = ({ images }) => {
   const onZoom = useCallback(() => {
     setShowImagesZoom(true);
   }, []);
+
   const onClose = useCallback(() => {
     setShowImagesZoom(false);
   }, []);
@@ -26,8 +27,8 @@ const PostImages = ({ images }) => {
     return (
       <>
         <div>
-          <img role="presentation" style={{ width: '50%', display: 'inline-block' }} src={images[0].src} alt={images[0].src} width="50%" onClick={onZoom} />
-          <img role="presentation" style={{ width: '50%', display: 'inline-block' }} src={images[1].src} alt={images[1].src} width="50%" onClick={onZoom} />
+          <img role="presentation" src={images[0].src} alt={images[0].src} width="50%" onClick={onZoom} />
+          <img role="presentation" src={images[1].src} alt={images[1].src} width="50%" onClick={onZoom} />
         </div>
         {showImagesZoom && <ImagesZoom images={images} onClose={onClose} />}
       </>
@@ -36,7 +37,7 @@ const PostImages = ({ images }) => {
   return (
     <>
       <div>
-        <img role="presentation" style={{ width: '50%', display: 'inline-block' }} src={images[0].src} alt={images[0].src} onClick={onZoom} />
+        <img role="presentation" src={images[0].src} alt={images[0].src} width="50%" onClick={onZoom} />
         <div
           role="presentation"
           style={{ display: 'inline-block', width: '50%', textAlign: 'center', verticalAlign: 'middle' }}
