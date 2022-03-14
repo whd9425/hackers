@@ -19,7 +19,26 @@ const Signup = () => {
     const [nick, onChangeNick] = useInput('');
     const [password, onChangePassword] = useInput('');
     const dispatch = useDispatch();
-    const { isSigningUp, me } = useSelector((state) => state.user);
+
+    const { signUpLoading, signUpDone, signUpError, me } = useSelector((state) => state.user);
+    
+    useEffect(() => {
+        if (me && me.id) {
+            Router.replace('/');
+        }
+    }, [me && me.id]);
+
+    useEffect(() => {
+        if(signUpDone) {
+            Router.replace('/');
+        }
+    }, [signUpDone]);
+
+    useEffect(() => {
+        if(signUpError) {
+            alert(signUpError);
+        }
+    }, [signUpError]);
   
     useEffect(() => {
         if (me) {
@@ -64,7 +83,7 @@ const Signup = () => {
             </Head>
             <Form onFinish={onSubmit} style={{ padding: 10 }}>
                 <div>
-                    <label htmlFor="user-email">아이디</label>
+                    <label htmlFor="user-email">이메일</label>
                     <br />
                     <Input name="user-email" value={email} required onChange={onChangeEmail} />
                 </div>
