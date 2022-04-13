@@ -3,7 +3,7 @@ nextjs란 React의 서버사이드 렌더링(SSR)을 쉽게 구현할 수 있게
 (React에서도 SSR 구현이 가능하지만, 구현 방식이 복잡하고 번거롭다.)
 <br/><br/>
 
-## 렌더링(Rendering)
+## 렌더링(Rendering) 
 서버에서 요청해서 받은 내용을 브라우저에 표시해주는 것
 
 ## 1. SSR & CSR
